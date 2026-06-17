@@ -1,6 +1,7 @@
 import { Component, OnInit, inject, signal, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
+import { RouterLink } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 
 interface Career {
@@ -41,7 +42,7 @@ interface UserComment {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="min-h-screen bg-slate-50 flex flex-col justify-between font-sans antialiased text-slate-800">
@@ -51,27 +52,84 @@ interface UserComment {
         <div class="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white py-14 px-6 shadow-sm border-b border-slate-800">
           <div class="max-w-6xl mx-auto">
             <div class="flex justify-between items-center">
-              <span class="text-indigo-400 text-xs font-bold tracking-wider uppercase bg-indigo-950/80 px-3.5 py-1.5 rounded-full border border-indigo-900/50">
-                Repositorio Institucional
-              </span>
-              <div class="text-xs text-slate-300 flex items-center gap-3">
-                @if (authService.isAuthenticated()) {
-                  <span class="flex items-center gap-2">
-                    <span class="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                    Estudiante: <span class="font-semibold text-white">{{ authService.currentUser()?.fullName }}</span>
-                  </span>
-                  <span class="text-slate-600">|</span>
-                  <button 
-                    (click)="authService.logout()" 
-                    class="text-slate-400 hover:text-white transition-colors underline underline-offset-4 decoration-indigo-500">
-                    Cerrar Sesión
-                  </button>
-                } @else {
-                  <span class="text-slate-400">Sesión no iniciada</span>
-                }
+              <div class="flex items-center gap-3">
+                <span class="text-indigo-400 text-xs font-bold tracking-wider uppercase bg-indigo-950/80 px-3.5 py-1.5 rounded-full border border-indigo-900/50">
+                  Repositorio Institucional
+                </span>
               </div>
+
+              <!-- Nav links - Desktop -->
+              <div class="hidden lg:flex items-center gap-2">
+                <a routerLink="/about"
+                  class="text-[10px] text-slate-400 hover:text-white transition-colors flex items-center gap-1 px-3 py-1.5 rounded-full border border-slate-800/60 hover:border-indigo-500/30 bg-slate-900/40 hover:bg-slate-800/60">
+                  <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z"></path>
+                  </svg>
+                  Nosotros
+                </a>
+                <a routerLink="/services"
+                  class="text-[10px] text-slate-400 hover:text-white transition-colors flex items-center gap-1 px-3 py-1.5 rounded-full border border-slate-800/60 hover:border-indigo-500/30 bg-slate-900/40 hover:bg-slate-800/60">
+                  <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75"></path>
+                  </svg>
+                  Servicios
+                </a>
+                <a routerLink="/gallery"
+                  class="text-[10px] text-slate-400 hover:text-white transition-colors flex items-center gap-1 px-3 py-1.5 rounded-full border border-slate-800/60 hover:border-indigo-500/30 bg-slate-900/40 hover:bg-slate-800/60">
+                  <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z"></path>
+                  </svg>
+                  Galería
+                </a>
+                <a routerLink="/blog"
+                  class="text-[10px] text-slate-400 hover:text-white transition-colors flex items-center gap-1 px-3 py-1.5 rounded-full border border-slate-800/60 hover:border-indigo-500/30 bg-slate-900/40 hover:bg-slate-800/60">
+                  <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z"></path>
+                  </svg>
+                  Blog
+                </a>
+                <a routerLink="/contact"
+                  class="text-[10px] text-slate-400 hover:text-white transition-colors flex items-center gap-1 px-3 py-1.5 rounded-full border border-slate-800/60 hover:border-indigo-500/30 bg-slate-900/40 hover:bg-slate-800/60">
+                  <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"></path>
+                  </svg>
+                  Contacto
+                </a>
+                <!-- Auth indicator - Desktop -->
+                <div class="text-xs text-slate-300 flex items-center gap-3 ml-3 pl-3 border-l border-slate-800/60">
+                  @if (authService.isAuthenticated()) {
+                    <span class="flex items-center gap-2">
+                      <span class="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                      <span class="font-semibold text-white hidden xl:inline">{{ authService.currentUser()?.fullName }}</span>
+                    </span>
+                    <button 
+                      (click)="authService.logout()" 
+                      class="text-slate-400 hover:text-white transition-colors underline underline-offset-4 decoration-indigo-500">
+                      Cerrar
+                    </button>
+                  } @else {
+                    <span class="text-slate-400">Invitado</span>
+                  }
+                </div>
+              </div>
+
+              <!-- Hamburger button - Mobile -->
+              <button (click)="menuOpen.set(!menuOpen())"
+                class="lg:hidden relative w-9 h-9 flex items-center justify-center rounded-xl border border-slate-800/60 hover:border-indigo-500/30 bg-slate-900/40 hover:bg-slate-800/60 transition-all"
+                [attr.aria-label]="menuOpen() ? 'Cerrar menú' : 'Abrir menú'">
+                <div class="w-4 h-3.5 relative flex flex-col justify-between">
+                  <span class="block h-0.5 w-full bg-slate-400 rounded-full transition-all duration-300"
+                    [class.rotate-45]="menuOpen()"
+                    [class.translate-y-[6px]]="menuOpen()"></span>
+                  <span class="block h-0.5 w-full bg-slate-400 rounded-full transition-all duration-300"
+                    [class.opacity-0]="menuOpen()"></span>
+                  <span class="block h-0.5 w-full bg-slate-400 rounded-full transition-all duration-300"
+                    [class.-rotate-45]="menuOpen()"
+                    [class.-translate-y-[6px]]="menuOpen()"></span>
+                </div>
+              </button>
             </div>
-            
+
             <div class="mt-6 flex flex-col md:flex-row md:items-end justify-between gap-6">
               <div>
                 <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white leading-none">
@@ -275,7 +333,7 @@ interface UserComment {
       @if (activeView() === 'detail' && selectedFileForDetail()) {
         <div class="max-w-6xl mx-auto w-full px-6 py-8 flex-1 flex flex-col gap-6">
           
-          <div class="flex justify-between items-center bg-white p-4 rounded-2xl border border-slate-200/60 shadow-3xs">
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 bg-white p-4 rounded-2xl border border-slate-200/60 shadow-3xs">
             <button 
               (click)="closeFileDetail()"
               class="flex items-center gap-2 text-xs font-bold text-slate-600 hover:text-slate-900 transition-colors">
@@ -350,7 +408,7 @@ interface UserComment {
                     </div>
                     
                     <!-- PANEL DE CONTROL DE PAGINACIÓN -->
-                    <div class="p-3.5 bg-slate-950 border-t border-slate-800 flex justify-between items-center text-xs text-white relative">
+                    <div class="p-3.5 bg-slate-950 border-t border-slate-800 flex justify-between items-center text-xs text-white relative gap-2">
                       <!-- Toast de aviso para límites de página en memoria sin alerts -->
                       @if (showPageLimitWarning()) {
                         <div class="absolute -top-12 left-1/2 -translate-x-1/2 bg-slate-900 border border-slate-800 text-slate-300 px-4 py-2 rounded-full font-bold shadow-lg animate-bounce text-[10px]">
@@ -461,7 +519,7 @@ interface UserComment {
               <div class="bg-white rounded-2xl p-6 border border-slate-200/60 shadow-sm space-y-4">
                 <span class="text-[10px] font-bold text-indigo-500 tracking-wider uppercase block">Ficha Técnica</span>
                 
-                <div class="grid grid-cols-2 gap-4 text-center">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-center">
                   <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
                     <span class="text-[10px] font-bold text-slate-400 block uppercase">Descargas</span>
                     <span class="text-base font-black text-slate-900 mt-1 block">{{ selectedFileForDetail()!.downloads }}</span>
@@ -760,6 +818,81 @@ interface UserComment {
         <p>© 2026 UPC-Share. Repositorio institucional colaborativo para la Universidad Provincial de Córdoba.</p>
       </footer>
     </div>
+
+    <!-- Mobile Menu Overlay -->
+    @if (menuOpen()) {
+      <div class="lg:hidden fixed inset-0 z-[9999] bg-slate-950/95 backdrop-blur-md">
+        <div class="flex flex-col h-full p-6">
+          <!-- Close button -->
+          <div class="flex justify-end">
+            <button (click)="menuOpen.set(false)"
+              class="w-9 h-9 flex items-center justify-center rounded-xl border border-slate-800/60 hover:border-indigo-500/30 bg-slate-900/40 hover:bg-slate-800/60 transition-all"
+              aria-label="Cerrar menú">
+              <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Nav links -->
+          <nav class="flex-1 flex flex-col justify-center items-center gap-4">
+            <a routerLink="/about" (click)="menuOpen.set(false)"
+              class="text-lg text-slate-300 hover:text-white transition-all flex items-center gap-3 px-6 py-3 rounded-xl border border-slate-800/60 hover:border-indigo-500/30 bg-slate-900/40 hover:bg-slate-800/60 w-full max-w-xs justify-center">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z"></path>
+              </svg>
+              Nosotros
+            </a>
+            <a routerLink="/services" (click)="menuOpen.set(false)"
+              class="text-lg text-slate-300 hover:text-white transition-all flex items-center gap-3 px-6 py-3 rounded-xl border border-slate-800/60 hover:border-indigo-500/30 bg-slate-900/40 hover:bg-slate-800/60 w-full max-w-xs justify-center">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75"></path>
+              </svg>
+              Servicios
+            </a>
+            <a routerLink="/gallery" (click)="menuOpen.set(false)"
+              class="text-lg text-slate-300 hover:text-white transition-all flex items-center gap-3 px-6 py-3 rounded-xl border border-slate-800/60 hover:border-indigo-500/30 bg-slate-900/40 hover:bg-slate-800/60 w-full max-w-xs justify-center">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z"></path>
+              </svg>
+              Galería
+            </a>
+            <a routerLink="/blog" (click)="menuOpen.set(false)"
+              class="text-lg text-slate-300 hover:text-white transition-all flex items-center gap-3 px-6 py-3 rounded-xl border border-slate-800/60 hover:border-indigo-500/30 bg-slate-900/40 hover:bg-slate-800/60 w-full max-w-xs justify-center">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z"></path>
+              </svg>
+              Blog
+            </a>
+            <a routerLink="/contact" (click)="menuOpen.set(false)"
+              class="text-lg text-slate-300 hover:text-white transition-all flex items-center gap-3 px-6 py-3 rounded-xl border border-slate-800/60 hover:border-indigo-500/30 bg-slate-900/40 hover:bg-slate-800/60 w-full max-w-xs justify-center">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"></path>
+              </svg>
+              Contacto
+            </a>
+          </nav>
+
+          <!-- Auth in mobile menu -->
+          <div class="text-center pb-8">
+            @if (authService.isAuthenticated()) {
+              <div class="flex flex-col items-center gap-3">
+                <span class="flex items-center gap-2 text-sm text-slate-300">
+                  <span class="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                  {{ authService.currentUser()?.fullName }}
+                </span>
+                <button (click)="authService.logout(); menuOpen.set(false)"
+                  class="text-sm text-slate-400 hover:text-white transition-colors underline underline-offset-4 decoration-indigo-500">
+                  Cerrar Sesión
+                </button>
+              </div>
+            } @else {
+              <span class="text-sm text-slate-400">Sesión no iniciada</span>
+            }
+          </div>
+        </div>
+      </div>
+    }
   `,
   styles: [`
     @keyframes slideIn {
@@ -784,6 +917,7 @@ export class ExploreComponent implements OnInit {
   activeView = signal<'explore' | 'detail'>('explore');
   selectedFileForDetail = signal<FileMetadata | null>(null);
   isEditMode = signal<boolean>(false);
+  menuOpen = signal<boolean>(false);
 
   currentPdfPage = signal<number>(1);
   pdfPageLimitReached = signal<boolean>(false);

@@ -6,6 +6,26 @@ export const routes: Routes = [
     loadComponent: () => import('./features/explore/explore.component').then(m => m.ExploreComponent)
   },
   {
+    path: 'about',
+    loadComponent: () => import('./features/about/about.component').then(m => m.AboutComponent)
+  },
+  {
+    path: 'services',
+    loadComponent: () => import('./features/services/services.component').then(m => m.ServicesComponent)
+  },
+  {
+    path: 'gallery',
+    loadComponent: () => import('./features/gallery/gallery.component').then(m => m.GalleryComponent)
+  },
+  {
+    path: 'blog',
+    loadComponent: () => import('./features/blog/blog.component').then(m => m.BlogComponent)
+  },
+  {
+    path: 'contact',
+    loadComponent: () => import('./features/contact/contact.component').then(m => m.ContactComponent)
+  },
+  {
     path: 'auth/login',
     loadComponent: () => import('./features/auth/login/login.component').then(m => m.LoginComponent)
   },
