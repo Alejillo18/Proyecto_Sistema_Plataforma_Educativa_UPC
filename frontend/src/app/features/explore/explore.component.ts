@@ -101,6 +101,12 @@ interface UserComment {
                     <span class="flex items-center gap-2">
                       <span class="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
                       <span class="font-semibold text-white hidden xl:inline">{{ authService.currentUser()?.fullName }}</span>
+                      <span class="text-[10px] font-bold px-2 py-0.5 rounded-md" 
+                        [class.bg-indigo-950]="authService.currentUser()?.role === 'PROFESOR'"
+                        [class.text-indigo-300]="authService.currentUser()?.role === 'PROFESOR'"
+                        [class.bg-slate-800]="authService.currentUser()?.role !== 'PROFESOR'"
+                        [class.text-slate-400]="authService.currentUser()?.role !== 'PROFESOR'"
+                      >{{ authService.currentUser()?.role === 'PROFESOR' ? 'Profesor' : 'Estudiante' }}</span>
                     </span>
                     <button 
                       (click)="authService.logout()" 
@@ -108,7 +114,17 @@ interface UserComment {
                       Cerrar
                     </button>
                   } @else {
-                    <span class="text-slate-400">Invitado</span>
+                    <a routerLink="/auth/login"
+                      class="font-semibold text-white bg-indigo-600 hover:bg-indigo-500 px-4 py-2 rounded-xl transition-all text-xs shadow-md shadow-indigo-950/50 flex items-center gap-1.5">
+                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9"></path>
+                      </svg>
+                      Ingresar
+                    </a>
+                    <a routerLink="/auth/register"
+                      class="text-slate-400 hover:text-white transition-colors underline underline-offset-4 decoration-indigo-500">
+                      Registrarse
+                    </a>
                   }
                 </div>
               </div>
@@ -887,7 +903,19 @@ interface UserComment {
                 </button>
               </div>
             } @else {
-              <span class="text-sm text-slate-400">Sesión no iniciada</span>
+              <div class="flex flex-col items-center gap-3">
+                <a routerLink="/auth/login" (click)="menuOpen.set(false)"
+                  class="text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-500 px-6 py-2.5 rounded-xl transition-all shadow-md shadow-indigo-950/50 flex items-center gap-2">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9"></path>
+                  </svg>
+                  Iniciar Sesión
+                </a>
+                <a routerLink="/auth/register" (click)="menuOpen.set(false)"
+                  class="text-sm text-slate-400 hover:text-white transition-colors underline underline-offset-4 decoration-indigo-500">
+                  Crear Cuenta
+                </a>
+              </div>
             }
           </div>
         </div>

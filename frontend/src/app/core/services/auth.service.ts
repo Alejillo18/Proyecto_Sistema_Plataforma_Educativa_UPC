@@ -8,6 +8,7 @@ export interface User {
   id: string;
   email: string;
   fullName: string;
+  role: 'PROFESOR' | 'ESTUDIANTE';
   createdAt: string;
   careers?: Array<{ id: string; name: string }>;
 }

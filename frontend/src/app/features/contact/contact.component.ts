@@ -85,7 +85,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
               }
 
               <button type="submit" [disabled]="contactForm.invalid"
-                class="w-full bg-indigo-600 hover:bg-indigo-500 disabled:bg-slate-800/60 disabled:text-white text-white text-sm font-bold py-3.5 rounded-xl transition-all shadow-lg shadow-indigo-500/20 flex items-center justify-center gap-2">
+                class=  "w-full bg-indigo-600 hover:bg-indigo-500 disabled:bg-slate-800/60 disabled:text-white text-white text-sm font-bold py-3.5 rounded-xl transition-all shadow-lg shadow-indigo-500/20 flex items-center justify-center gap-2">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"></path>
                 </svg>
