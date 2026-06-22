@@ -10,14 +10,24 @@ datasource db {
 
 // Modelo que representa la tabla de usuarios
 model User {
-  id           String       @id @default(uuid()) @db.Uuid
-  email        String       @unique @db.VarChar(255)
-  passwordHash String       @map("password_hash") @db.VarChar(255)
-  fullName     String?      @map("full_name") @db.VarChar(100)
-  createdAt    DateTime     @default(now()) @map("created_at") @db.Timestamp(6)
-  careers      UserCareer[]
+  id                  String       @id @default(uuid()) @db.Uuid
+  email               String       @unique @db.VarChar(255)
+  passwordHash        String       @map("password_hash") @db.VarChar(255)
+  fullName            String?      @map("full_name") @db.VarChar(100)
+  role                Role         @default(ESTUDIANTE)
+  passwordResetToken  String?      @unique @map("password_reset_token") @db.VarChar(255)
+  passwordResetExpires DateTime?   @map("password_reset_expires") @db.Timestamp(6)
+  createdAt           DateTime     @default(now()) @map("created_at") @db.Timestamp(6)
+  careers             UserCareer[]
 
   @@map("users")
+}
+
+enum Role {
+  PROFESOR
+  ESTUDIANTE
+
+  @@map("roles")
 }
 
 // Modelo que representa las carreras universitarias

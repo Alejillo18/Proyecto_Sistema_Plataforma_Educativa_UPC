@@ -1,0 +1,128 @@
+<div class="auth-page-wrapper">
+    <div class="auth-card">
+      
+      <div class="brand-header">
+        <div class="brand-icon-box">
+          <svg class="brand-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path>
+          </svg>
+        </div>
+        <h2 class="auth-title">Registrar nueva cuenta</h2>
+        <p class="auth-subtitle">
+          Completa el formulario institucional para comenzar a compartir material de estudio.
+        </p>
+      </div>
+  
+      @if (errorMessage()) {
+        <div class="alert alert-danger">
+          <svg class="alert-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+          </svg>
+          <div class="alert-content">
+            <p class="alert-title">Error de validación</p>
+            <p class="alert-text">{{ errorMessage() }}</p>
+          </div>
+        </div>
+      }
+  
+      <form class="auth-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="form-inputs-group">
+          
+          <div class="form-group">
+            <label for="fullName" class="form-label">Nombre y Apellido</label>
+            <input
+              id="fullName"
+              type="text"
+              formControlName="fullName"
+              class="form-control"
+              placeholder="Ej. Juan Pérez"
+              [class.input-error]="isFieldInvalid('fullName')"
+            />
+            @if (isFieldInvalid('fullName')) {
+              <p class="error-message">
+                El nombre completo es requerido (mínimo 2 caracteres).
+              </p>
+            }
+          </div>
+  
+          <div class="form-group">
+            <label for="email" class="form-label">Correo Institucional</label>
+            <input
+              id="email"
+              type="email"
+              formControlName="email"
+              class="form-control"
+              placeholder="ejemplo@upc.edu.ar"
+              [class.input-error]="isFieldInvalid('email')"
+            />
+            @if (isFieldInvalid('email')) {
+              <p class="error-message">
+                Debe ingresar un correo con formato válido.
+              </p>
+            }
+          </div>
+  
+          <div class="form-group">
+            <label for="password" class="form-label">Contraseña</label>
+            <input
+              id="password"
+              type="password"
+              formControlName="password"
+              class="form-control"
+              placeholder="Mínimo 6 caracteres"
+              [class.input-error]="isFieldInvalid('password')"
+            />
+            @if (isFieldInvalid('password')) {
+              <p class="error-message">
+                La contraseña debe poseer al menos 6 caracteres.
+              </p>
+            }
+          </div>
+  
+          <div class="form-group">
+            <label for="confirmPassword" class="form-label">Confirmar Contraseña</label>
+            <input
+              id="confirmPassword"
+              type="password"
+              formControlName="confirmPassword"
+              class="form-control"
+              placeholder="Repite tu contraseña"
+              [class.input-error]="isFieldInvalid('confirmPassword') || registerForm.hasError('mismatch')"
+            />
+            @if (registerForm.hasError('mismatch') && registerForm.get('confirmPassword')?.touched) {
+              <p class="error-message">
+                Las contraseñas ingresadas no coinciden.
+              </p>
+            }
+          </div>
+        </div>
+  
+        <div>
+          <button
+            type="submit"
+            [disabled]="registerForm.invalid || isLoading()"
+            class="btn-submit">
+            @if (isLoading()) {
+              <svg class="spinner-icon" fill="none" viewBox="0 0 24 24">
+                <circle class="spinner-bg" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="spinner-draw" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              Creando tu cuenta...
+            } @else {
+              Completar Registro
+            }
+          </button>
+        </div>
+      </form>
+  
+      <div class="auth-redirection-box">
+        <p class="redirection-paragraph">
+          ¿Ya tienes cuenta? 
+          <a routerLink="/auth/login" class="login-link">
+            Inicia sesión aquí
+          </a>
+        </p>
+      </div>
+  
+    </div>
+  </div>

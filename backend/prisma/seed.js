@@ -1,3 +1,4 @@
+import bcrypt from 'bcryptjs';
 import { prisma } from '../src/config/db.js';
 
   async function main() {
@@ -7,6 +8,7 @@ import { prisma } from '../src/config/db.js';
     await prisma.userCareer.deleteMany({});
     await prisma.subject.deleteMany({});
     await prisma.career.deleteMany({});
+    await prisma.user.deleteMany({});
 
     console.log('Base de datos limpia.');
 
@@ -29,6 +31,28 @@ import { prisma } from '../src/config/db.js';
     });
 
     console.log('Carreras creadas exitosamente.');
+
+    const salt = await bcrypt.genSalt(10);
+
+    await prisma.user.create({
+      data: {
+        email: 'prof@upc.edu',
+        passwordHash: await bcrypt.hash('prof123', salt),
+        fullName: 'Profesor',
+        role: 'PROFESOR'
+      }
+    });
+
+    await prisma.user.create({
+      data: {
+        email: 'alumno@upc.edu',
+        passwordHash: await bcrypt.hash('alumno123', salt),
+        fullName: 'Alumno',
+        role: 'ESTUDIANTE'
+      }
+    });
+
+    console.log('Usuarios por defecto creados exitosamente.');
 
     // 3. Crear Materias para Ingeniería en Sistemas
     await prisma.subject.createMany({

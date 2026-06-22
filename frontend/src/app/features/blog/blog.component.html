@@ -1,0 +1,99 @@
+<div class="blog-wrapper">
+    <header class="hero-header">
+      <div class="header-container">
+        <div class="header-top">
+          <span class="badge-tag">Blog</span>
+          <a routerLink="/" class="back-link">
+            <svg class="icon-back" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"></path>
+            </svg>
+            Volver al Repositorio
+          </a>
+        </div>
+        <div class="header-content">
+          <h1 class="hero-title">Blog & <span class="accent-text">Novedades</span></h1>
+          <p class="hero-subtitle">
+            Mantenete al día con las últimas actualizaciones, tips de estudio y novedades del proyecto.
+          </p>
+        </div>
+      </div>
+    </header>
+  
+    <section class="search-section">
+      <div class="search-container">
+        <svg class="search-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"></path>
+        </svg>
+        <input type="text" placeholder="Buscar artículos..." class="search-input">
+      </div>
+    </section>
+  
+    <section class="articles-section">
+      <div class="articles-container">
+        <div class="featured-article">
+          <div class="featured-grid">
+            <div class="featured-info">
+              <span class="featured-tag">Destacado</span>
+              <h2 class="featured-title">UPC-Share supera los 500 recursos compartidos</h2>
+              <p class="featured-excerpt">
+                La comunidad estudiantil sigue creciendo. Ya son más de 500 apuntes, parciales y guías 
+                compartidas por estudiantes de todas las carreras de la UPC.
+              </p>
+              <div class="metadata">
+                <span class="meta-item">
+                  <svg class="meta-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                  15 Jun 2026
+                </span>
+                <span class="meta-item">
+                  <svg class="meta-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"></path>
+                  </svg>
+                  Equipo UPC-Share
+                </span>
+              </div>
+            </div>
+            <div class="featured-visual">
+              <svg class="visual-icon" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+  
+        <div class="articles-grid">
+          @for (post of blogPosts; track post.title) {
+            <article class="post-card">
+              <div class="post-visual-box">
+                <div [innerHTML]="post.icon" class="post-card-icon"></div>
+              </div>
+              <div class="post-content">
+                <div class="post-header-meta">
+                  <span class="post-category" [class]="post.categoryClass">{{ post.category }}</span>
+                  <span class="post-date">{{ post.date }}</span>
+                </div>
+                <h3 class="post-title">{{ post.title }}</h3>
+                <p class="post-excerpt">{{ post.excerpt }}</p>
+                <div class="post-footer">
+                  <span class="post-author">Por {{ post.author }}</span>
+                  <span class="post-more-link">Leer más →</span>
+                </div>
+              </div>
+            </article>
+          }
+        </div>
+      </div>
+    </section>
+  
+    <footer class="footer">
+      <p>© 2026 UPC-Share. Repositorio institucional colaborativo para la Universidad Provincial de Córdoba.</p>
+      <div class="footer-links">
+        <a routerLink="/" class="footer-link">Inicio</a>
+        <span class="footer-separator">·</span>
+        <a routerLink="/about" class="footer-link">Sobre Nosotros</a>
+        <span class="footer-separator">·</span>
+        <a routerLink="/services" class="footer-link">Servicios</a>
+      </div>
+    </footer>
+  </div>
