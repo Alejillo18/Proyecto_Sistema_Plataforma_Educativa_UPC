@@ -6,7 +6,7 @@ import { RouterOutlet } from '@angular/router';
   selector: 'app-root',
   imports: [RouterOutlet],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrl: './app.css',
 })
 export class App implements OnInit {
   private readonly platformId = inject(PLATFORM_ID);
@@ -29,7 +29,7 @@ export class App implements OnInit {
   }
 
   protected toggleTheme(): void {
-    this.isDark.update(v => !v);
+    this.isDark.update((v) => !v);
     if (isPlatformBrowser(this.platformId)) {
       localStorage.setItem('theme', this.isDark() ? 'dark' : 'light');
     }

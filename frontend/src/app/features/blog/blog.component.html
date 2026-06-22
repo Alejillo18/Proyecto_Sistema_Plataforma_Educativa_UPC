@@ -1,0 +1,159 @@
+<div class="blog-page">
+  <header class="blog-hero">
+    <div class="blog-hero-content">
+      <div class="blog-hero-header">
+        <span class="blog-badge">Blog</span>
+        <a routerLink="/" class="blog-back-link">
+          <svg
+            class="back-link-icon"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
+            ></path>
+          </svg>
+          Volver al Repositorio
+        </a>
+      </div>
+      <div class="blog-hero-body">
+        <h1 class="blog-hero-title">Blog & <span class="hero-title-accent">Novedades</span></h1>
+        <p class="blog-hero-subtitle">
+          Mantenete al día con las últimas actualizaciones, tips de estudio y novedades del
+          proyecto.
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <section class="blog-search">
+    <div class="blog-search-inner">
+      <svg
+        class="search-icon"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+        ></path>
+      </svg>
+      <input type="text" placeholder="Buscar artículos..." class="blog-search-input" />
+    </div>
+  </section>
+
+  <section class="blog-section">
+    <div class="blog-content">
+      <div class="blog-featured">
+        <div class="blog-featured-grid">
+          <div class="blog-featured-content">
+            <span class="blog-featured-badge">Destacado</span>
+            <h2 class="blog-featured-title">UPC-Share supera los 500 recursos compartidos</h2>
+            <p class="blog-featured-text">
+              La comunidad estudiantil sigue creciendo. Ya son más de 500 apuntes, parciales y guías
+              compartidas por estudiantes de todas las carreras de la UPC.
+            </p>
+            <div class="blog-featured-meta">
+              <span class="meta-item">
+                <svg
+                  class="meta-icon"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                  ></path>
+                </svg>
+                15 Jun 2026
+              </span>
+              <span class="meta-item">
+                <svg
+                  class="meta-icon"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+                  ></path>
+                </svg>
+                Equipo UPC-Share
+              </span>
+            </div>
+          </div>
+          <div class="blog-featured-icon">
+            <svg
+              class="featured-icon-svg"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+              ></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="blog-grid">
+        @for (post of blogPosts; track post.title) {
+          <article class="blog-card">
+            <div class="blog-card-image">
+              <div [innerHTML]="post.icon" class="card-image-icon"></div>
+            </div>
+            <div class="blog-card-body">
+              <div class="blog-card-meta">
+                <span class="blog-card-category" [class]="post.categoryClass">{{
+                  post.category
+                }}</span>
+                <span class="blog-card-date">{{ post.date }}</span>
+              </div>
+              <h3 class="blog-card-title">
+                {{ post.title }}
+              </h3>
+              <p class="blog-card-excerpt">
+                {{ post.excerpt }}
+              </p>
+              <div class="blog-card-footer">
+                <span class="blog-card-author">Por {{ post.author }}</span>
+                <span class="blog-card-link">Leer más →</span>
+              </div>
+            </div>
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+
+  <footer class="blog-footer">
+    <p class="blog-footer-text">
+      © 2026 UPC-Share. Repositorio institucional colaborativo para la Universidad Provincial de
+      Córdoba.
+    </p>
+    <div class="blog-footer-links">
+      <a routerLink="/" class="blog-footer-link">Inicio</a>
+      <span class="blog-footer-divider">·</span>
+      <a routerLink="/about" class="blog-footer-link">Sobre Nosotros</a>
+      <span class="blog-footer-divider">·</span>
+      <a routerLink="/services" class="blog-footer-link">Servicios</a>
+    </div>
+  </footer>
+</div>

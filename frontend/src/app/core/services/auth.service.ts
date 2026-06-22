@@ -30,7 +30,7 @@ export interface ProfileResponse {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   private http = inject(HttpClient);
@@ -43,31 +43,30 @@ export class AuthService {
   readonly isAuthenticated = computed(() => this.currentUser() !== null);
 
   register(fullName: string, email: string, password: string): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>('/api/auth/register', { fullName, email, password }).pipe(
-      tap(response => this.handleAuthentication(response))
-    );
+    return this.http
+      .post<AuthResponse>('/api/auth/register', { fullName, email, password })
+      .pipe(tap((response) => this.handleAuthentication(response)));
   }
 
   login(email: string, password: string): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>('/api/auth/login', { email, password }).pipe(
-      tap(response => this.handleAuthentication(response))
-    );
+    return this.http
+      .post<AuthResponse>('/api/auth/login', { email, password })
+      .pipe(tap((response) => this.handleAuthentication(response)));
   }
 
   fetchProfile(): Observable<ProfileResponse> {
     return this.http.get<ProfileResponse>('/api/auth/profile').pipe(
       tap({
-        next: response => {
+        next: (response) => {
           this.currentUser.set(response.data.user);
           if (isPlatformBrowser(this.platformId)) {
             localStorage.setItem('user', JSON.stringify(response.data.user));
           }
         },
-        error: () => this.logout()
-      })
+        error: () => this.logout(),
+      }),
     );
   }
-
 
   logout(): void {
     this.currentUser.set(null);
@@ -85,16 +84,14 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
-
-
   private handleAuthentication(response: AuthResponse): void {
     const { user, token } = response.data;
-    
+
     if (isPlatformBrowser(this.platformId)) {
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
     }
-    
+
     this.currentUser.set(user);
   }
 

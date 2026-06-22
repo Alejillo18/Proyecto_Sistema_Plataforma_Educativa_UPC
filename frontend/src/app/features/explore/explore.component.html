@@ -1,0 +1,1231 @@
+<div class="explore-page">
+  <!-- SECCIÓN DE CABECERA Y CONTROL DE BÚSQUEDA (Solo visible en vista explorador) -->
+  @if (activeView() === 'explore') {
+    <div class="explore-header">
+      <div class="explore-header-inner">
+        <div class="explore-header-row">
+          <div class="explore-header-left">
+            <span class="explore-badge"> Repositorio Institucional </span>
+          </div>
+
+          <!-- Nav links - Desktop -->
+          <div class="explore-nav">
+            <a routerLink="/about" class="explore-nav-link">
+              <svg
+                class="explore-nav-icon"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z"
+                ></path>
+              </svg>
+              Nosotros
+            </a>
+            <a routerLink="/services" class="explore-nav-link">
+              <svg
+                class="explore-nav-icon"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75"
+                ></path>
+              </svg>
+              Servicios
+            </a>
+            <a routerLink="/gallery" class="explore-nav-link">
+              <svg
+                class="explore-nav-icon"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z"
+                ></path>
+              </svg>
+              Galería
+            </a>
+            <a routerLink="/blog" class="explore-nav-link">
+              <svg
+                class="explore-nav-icon"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z"
+                ></path>
+              </svg>
+              Blog
+            </a>
+            <a routerLink="/contact" class="explore-nav-link">
+              <svg
+                class="explore-nav-icon"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
+                ></path>
+              </svg>
+              Contacto
+            </a>
+            <!-- Auth indicator - Desktop -->
+            <div class="explore-auth">
+              @if (authService.isAuthenticated()) {
+                <span class="explore-auth-user">
+                  <span class="explore-auth-dot"></span>
+                  <span class="explore-auth-name">{{ authService.currentUser()?.fullName }}</span>
+                  <span
+                    class="explore-role-badge"
+                    [class.role-profesor]="authService.currentUser()?.role === 'PROFESOR'"
+                    [class.role-estudiante]="authService.currentUser()?.role !== 'PROFESOR'"
+                    >{{
+                      authService.currentUser()?.role === 'PROFESOR' ? 'Profesor' : 'Estudiante'
+                    }}</span
+                  >
+                </span>
+                <button (click)="authService.logout()" class="explore-auth-logout">Cerrar</button>
+              } @else {
+                <a routerLink="/auth/login" class="explore-btn-login">
+                  <svg
+                    class="explore-btn-icon"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9"
+                    ></path>
+                  </svg>
+                  Ingresar
+                </a>
+                <a routerLink="/auth/register" class="explore-auth-register"> Registrarse </a>
+              }
+            </div>
+          </div>
+
+          <!-- Hamburger button - Mobile -->
+          <button
+            (click)="menuOpen.set(!menuOpen())"
+            class="explore-hamburger"
+            [attr.aria-label]="menuOpen() ? 'Cerrar menú' : 'Abrir menú'"
+          >
+            <div class="hamburger-inner">
+              <span class="hamburger-line" [class.hamburger-top-open]="menuOpen()"></span>
+              <span class="hamburger-line" [class.hamburger-middle-open]="menuOpen()"></span>
+              <span class="hamburger-line" [class.hamburger-bottom-open]="menuOpen()"></span>
+            </div>
+          </button>
+        </div>
+
+        <div class="explore-hero-bottom">
+          <div>
+            <h1 class="explore-hero-title">Explora apuntes de la comunidad</h1>
+            <p class="explore-hero-subtitle">
+              Busca tu carrera académica y accede de forma inmediata a parciales, guías de estudio
+              prácticos y apuntes de alta calidad compartidos de forma colaborativa.
+            </p>
+          </div>
+
+          @if (authService.isAuthenticated()) {
+            <button (click)="openUploadModal()" class="explore-btn-upload">
+              <svg
+                class="explore-btn-upload-icon"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"></path>
+              </svg>
+              Subir Documento
+            </button>
+          }
+        </div>
+
+        <!-- Selector de Carreras -->
+        <div class="explore-careers">
+          @for (career of careers(); track career.id) {
+            <button
+              (click)="selectCareer(career.id)"
+              [class.career-active]="selectedCareerId() === career.id"
+              [class.career-inactive]="selectedCareerId() !== career.id"
+              class="explore-career-btn"
+            >
+              <svg
+                class="explore-career-icon"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 14l9-5-9-5-9 5 9 5z"
+                ></path>
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"
+                ></path>
+              </svg>
+              {{ career.name }}
+            </button>
+          } @empty {
+            <p class="explore-careers-empty">Cargando carreras disponibles en el repositorio...</p>
+          }
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- VISTA 1: EXPLORADOR GENERAL -->
+  @if (activeView() === 'explore') {
+    <div class="explore-content">
+      <aside class="explore-sidebar">
+        <div class="explore-sidebar-card">
+          <h3 class="explore-sidebar-title">
+            <svg
+              class="explore-sidebar-title-icon"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+              ></path>
+            </svg>
+            Asignaturas
+          </h3>
+
+          @if (selectedCareerId()) {
+            @for (year of [1, 2, 3, 4, 5]; track year) {
+              @if (hasSubjectsOfYear(year)) {
+                <div class="explore-year-group">
+                  <span class="explore-year-label">{{ year }}° Año Académico</span>
+                  <ul class="explore-subject-list">
+                    @for (subj of getSubjectsOfYear(year); track subj.id) {
+                      <li>
+                        <button
+                          (click)="selectSubject(subj.id)"
+                          [class.subject-active]="selectedSubjectId() === subj.id"
+                          [class.subject-inactive]="selectedSubjectId() !== subj.id"
+                          class="explore-subject-btn"
+                        >
+                          <span
+                            class="explore-subject-dot"
+                            [class.dot-active]="selectedSubjectId() === subj.id"
+                            [class.dot-inactive]="selectedSubjectId() !== subj.id"
+                          ></span>
+                          {{ subj.name }}
+                        </button>
+                      </li>
+                    }
+                  </ul>
+                </div>
+              }
+            }
+          } @else {
+            <div class="explore-sidebar-empty">
+              <svg
+                class="explore-sidebar-empty-icon"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15 15l-6 6m0 0l-6-6m6 6V9a9 9 0 0118 0v1"
+                ></path>
+              </svg>
+              <p class="explore-sidebar-empty-text">
+                Selecciona una carrera académica arriba para ver sus materias correspondientes.
+              </p>
+            </div>
+          }
+        </div>
+      </aside>
+
+      <main class="explore-main">
+        @if (selectedSubjectId()) {
+          <div class="explore-main-header">
+            <h2 class="explore-main-title">Documentos disponibles ({{ files().length }})</h2>
+          </div>
+
+          <div class="explore-file-grid">
+            @for (file of files(); track file._id) {
+              <div class="explore-file-card">
+                <div>
+                  <div class="explore-file-card-header">
+                    <span class="explore-file-type">{{ getFileExtension(file.fileType) }}</span>
+                    <span class="explore-file-size">{{ formatBytes(file.fileSize) }}</span>
+                  </div>
+
+                  <h3 (click)="viewFileDetail(file)" class="explore-file-title">
+                    {{ file.title }}
+                  </h3>
+                  <p class="explore-file-desc">
+                    {{ file.description || 'Sin descripción adicional para este archivo.' }}
+                  </p>
+
+                  @if (file.tags.length > 0) {
+                    <div class="explore-file-tags">
+                      @for (tag of file.tags; track tag) {
+                        <span class="explore-file-tag">#{{ tag }}</span>
+                      }
+                    </div>
+                  }
+                </div>
+
+                <div class="explore-file-footer">
+                  <div class="explore-file-actions">
+                    <button
+                      (click)="toggleLike(file)"
+                      [class.liked]="hasUserLiked(file)"
+                      class="explore-btn-like"
+                    >
+                      <svg
+                        class="explore-btn-like-icon"
+                        [attr.fill]="hasUserLiked(file) ? 'currentColor' : 'none'"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                        ></path>
+                      </svg>
+                      <span class="explore-like-count">{{ file.likes.length }}</span>
+                    </button>
+
+                    <span class="explore-view-stats">
+                      <svg
+                        class="explore-view-icon"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                        ></path>
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                        ></path>
+                      </svg>
+                      <span class="explore-view-count">{{ file.downloads }}</span>
+                    </span>
+
+                    <button (click)="viewFileDetail(file)" class="explore-btn-detail">
+                      <svg
+                        class="explore-btn-detail-icon"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                        ></path>
+                      </svg>
+                      <span class="explore-btn-detail-text">Detalles</span>
+                    </button>
+                  </div>
+
+                  <button (click)="download(file)" class="explore-btn-download">
+                    <svg
+                      class="explore-btn-download-icon"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                      ></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            } @empty {
+              <div class="explore-empty">
+                <svg
+                  class="explore-empty-icon"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"
+                  ></path>
+                </svg>
+                <h4 class="explore-empty-title">No hay apuntes disponibles</h4>
+                <p class="explore-empty-text">
+                  Aún no se han subido documentos de estudio para esta materia académica. ¡Sé el
+                  primero en colaborar!
+                </p>
+              </div>
+            }
+          </div>
+        } @else {
+          <div class="explore-prompt">
+            <svg
+              class="explore-prompt-icon"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
+              ></path>
+            </svg>
+            <h3 class="explore-prompt-title">Explora asignaturas de estudio</h3>
+            <p class="explore-prompt-text">
+              Selecciona una de las materias de la barra de navegación lateral para listar todos los
+              apuntes cargados por la comunidad estudiantil.
+            </p>
+          </div>
+        }
+      </main>
+    </div>
+  }
+
+  <!-- VISTA 2: PREVISUALIZACIÓN Y DETALLE COMPLETO DEL DOCUMENTO -->
+  @if (activeView() === 'detail' && selectedFileForDetail()) {
+    <div class="explore-detail">
+      <div class="explore-detail-header">
+        <button (click)="closeFileDetail()" class="explore-btn-back">
+          <svg
+            class="explore-btn-back-icon"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
+            ></path>
+          </svg>
+          Volver al Explorador
+        </button>
+
+        <div class="explore-detail-actions">
+          @if (isFileOwner()) {
+            @if (!isEditMode()) {
+              <button (click)="enableEditMode()" class="explore-btn-edit">
+                <svg
+                  class="explore-btn-icon"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
+                  ></path>
+                </svg>
+                Editar Apunte
+              </button>
+              <button (click)="deleteFile(selectedFileForDetail()!._id)" class="explore-btn-delete">
+                <svg
+                  class="explore-btn-icon"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-1.816A2.25 2.25 0 0013.81 2H10.19a2.25 2.25 0 00-2.25 2.25V4"
+                  ></path>
+                </svg>
+                Eliminar
+              </button>
+            } @else {
+              <button (click)="saveChanges()" class="explore-btn-save">Guardar Cambios</button>
+              <button (click)="disableEditMode()" class="explore-btn-cancel">Cancelar</button>
+            }
+          }
+        </div>
+      </div>
+
+      <div class="explore-detail-grid">
+        <!-- COLUMNA IZQUIERDA: PREVISUALIZADOR DEL ARCHIVO -->
+        <div class="explore-detail-main">
+          <div class="explore-preview">
+            <div class="explore-preview-header">
+              <span class="explore-preview-label">
+                <svg
+                  class="explore-preview-label-icon"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                  ></path>
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                  ></path>
+                </svg>
+                Previsualización Segura
+              </span>
+            </div>
+
+            <!-- VISUALIZADOR SEGURO DE ARCHIVOS -->
+            <div class="explore-preview-body">
+              @if (selectedFileForDetail()?.fileType?.includes('pdf')) {
+                <div class="explore-preview-pdf">
+                  <img
+                    [src]="getPdfPageUrl(currentPdfPage())"
+                    (error)="onPdfPageError()"
+                    class="explore-preview-img"
+                    alt="Página del documento de estudio"
+                  />
+                </div>
+
+                <div class="explore-preview-controls">
+                  @if (showPageLimitWarning()) {
+                    <div class="explore-preview-toast">Fin del documento alcanzado</div>
+                  }
+
+                  <button
+                    [disabled]="currentPdfPage() <= 1"
+                    (click)="prevPdfPage()"
+                    class="explore-btn-prev"
+                  >
+                    <svg
+                      class="explore-btn-prev-icon"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M15.75 19.5L8.25 12l7.5-7.5"
+                      ></path>
+                    </svg>
+                    Anterior
+                  </button>
+
+                  <span class="explore-page-num">PÁGINA {{ currentPdfPage() }}</span>
+
+                  <button
+                    [disabled]="pdfPageLimitReached()"
+                    (click)="nextPdfPage()"
+                    class="explore-btn-next"
+                  >
+                    Siguiente
+                    <svg
+                      class="explore-btn-next-icon"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M8.25 4.5l7.5 7.5-7.5 7.5"
+                      ></path>
+                    </svg>
+                  </button>
+                </div>
+              } @else if (selectedFileForDetail()?.fileType?.includes('image')) {
+                <div class="explore-preview-image">
+                  <img
+                    [src]="getCleanImageUrl()"
+                    class="explore-preview-image-tag"
+                    alt="Previsualización de imagen"
+                  />
+                </div>
+              } @else {
+                <div class="explore-preview-unavailable">
+                  <svg
+                    class="explore-unavailable-icon"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"
+                    ></path>
+                  </svg>
+                  <h4 class="explore-unavailable-title">Vista previa no disponible</h4>
+                  <p class="explore-unavailable-text">
+                    Puedes descargar el archivo completo de forma directa haciendo clic en el botón
+                    de descarga.
+                  </p>
+                </div>
+              }
+            </div>
+          </div>
+
+          <!-- METADATOS Y DESCRIPCIÓN DEL APUNTE -->
+          <div class="explore-meta">
+            @if (!isEditMode()) {
+              <div>
+                <h2 class="explore-meta-title">{{ selectedFileForDetail()!.title }}</h2>
+                <p class="explore-meta-desc">
+                  {{
+                    selectedFileForDetail()!.description ||
+                      'Sin descripción adicional para este archivo.'
+                  }}
+                </p>
+              </div>
+
+              @if (selectedFileForDetail()!.tags.length > 0) {
+                <div class="explore-meta-tags">
+                  @for (tag of selectedFileForDetail()!.tags; track tag) {
+                    <span class="explore-meta-tag">#{{ tag }}</span>
+                  }
+                </div>
+              }
+            } @else {
+              <div class="explore-meta-form">
+                <div>
+                  <label class="explore-form-label">Modificar Título</label>
+                  <input
+                    [value]="editTitle()"
+                    (input)="editTitle.set($any($event.target).value)"
+                    type="text"
+                    class="explore-form-input"
+                  />
+                </div>
+
+                <div>
+                  <label class="explore-form-label">Modificar Descripción</label>
+                  <textarea
+                    (input)="editDesc.set($any($event.target).value)"
+                    rows="3"
+                    class="explore-form-textarea"
+                    >{{ editDesc() }}</textarea
+                  >
+                </div>
+
+                <div>
+                  <label class="explore-form-label"
+                    >Modificar Etiquetas (Separadas por comas)</label
+                  >
+                  <input
+                    [value]="editTags()"
+                    (input)="editTags.set($any($event.target).value)"
+                    type="text"
+                    class="explore-form-input"
+                  />
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+
+        <!-- COLUMNA DERECHA: ENGAGEMENT Y COMENTARIOS MONGODB -->
+        <div class="explore-detail-sidebar">
+          <!-- FICHA TÉCNICA DEL ARCHIVO -->
+          <div class="explore-techspec">
+            <span class="explore-techspec-title">Ficha Técnica</span>
+
+            <div class="explore-techspec-grid">
+              <div class="explore-techspec-item">
+                <span class="explore-techspec-label">Descargas</span>
+                <span class="explore-techspec-value">{{ selectedFileForDetail()!.downloads }}</span>
+              </div>
+              <div class="explore-techspec-item">
+                <span class="explore-techspec-label">Me Gusta</span>
+                <span class="explore-techspec-value">{{
+                  selectedFileForDetail()!.likes.length
+                }}</span>
+              </div>
+            </div>
+
+            <div class="explore-techspec-details">
+              <div class="explore-techspec-row">
+                <span class="explore-techspec-key">Tamaño:</span>
+                <span class="explore-techspec-val">{{
+                  formatBytes(selectedFileForDetail()!.fileSize)
+                }}</span>
+              </div>
+              <div class="explore-techspec-row">
+                <span class="explore-techspec-key">Publicado:</span>
+                <span class="explore-techspec-val">{{
+                  formatDate(selectedFileForDetail()!.createdAt)
+                }}</span>
+              </div>
+            </div>
+
+            <div class="explore-detail-actions-bar">
+              <button
+                (click)="toggleLike(selectedFileForDetail()!)"
+                [class.liked-bg]="hasUserLiked(selectedFileForDetail()!)"
+                [class.liked-text]="hasUserLiked(selectedFileForDetail()!)"
+                [class.unliked-bg]="!hasUserLiked(selectedFileForDetail()!)"
+                [class.unliked-text]="!hasUserLiked(selectedFileForDetail()!)"
+                class="explore-btn-like-detail"
+              >
+                <svg
+                  class="explore-btn-like-icon"
+                  [attr.fill]="hasUserLiked(selectedFileForDetail()!) ? 'currentColor' : 'none'"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                  ></path>
+                </svg>
+                {{ hasUserLiked(selectedFileForDetail()!) ? 'Te gusta' : 'Dar Me Gusta' }}
+              </button>
+              <button
+                (click)="download(selectedFileForDetail()!)"
+                class="explore-btn-download-detail"
+              >
+                <svg
+                  class="explore-btn-download-icon"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                  ></path>
+                </svg>
+                Descargar
+              </button>
+            </div>
+          </div>
+
+          <!-- HILO DE COMENTARIOS -->
+          <div class="explore-comments">
+            <div class="explore-comments-header">
+              <span class="explore-comments-title">
+                <svg
+                  class="explore-comments-title-icon"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                  ></path>
+                </svg>
+                Comentarios ({{ comments().length }})
+              </span>
+            </div>
+
+            <div class="explore-comments-body">
+              @for (comment of comments(); track comment._id) {
+                <div class="explore-comment">
+                  <div class="explore-comment-header">
+                    <span class="explore-comment-author">{{ comment.userFullName }}</span>
+                    <span class="explore-comment-date">{{ formatDate(comment.createdAt) }}</span>
+                  </div>
+                  <p class="explore-comment-text">{{ comment.content }}</p>
+
+                  @if (canDeleteComment(comment)) {
+                    <button (click)="deleteComment(comment._id)" class="explore-comment-delete">
+                      Borrar
+                    </button>
+                  }
+                </div>
+              } @empty {
+                <div class="explore-comments-empty">
+                  <p class="explore-comments-empty-title">Sin comentarios aún</p>
+                  <p class="explore-comments-empty-text">Escribe el primer mensaje aquí abajo.</p>
+                </div>
+              }
+            </div>
+
+            <div class="explore-comments-input">
+              @if (authService.isAuthenticated()) {
+                <div class="explore-comment-form">
+                  <input
+                    #inlineCommentBox
+                    placeholder="Escribe un mensaje..."
+                    (keyup.enter)="
+                      submitComment(inlineCommentBox.value); inlineCommentBox.value = ''
+                    "
+                    class="explore-comment-field"
+                  />
+                  <button
+                    (click)="submitComment(inlineCommentBox.value); inlineCommentBox.value = ''"
+                    class="explore-btn-send"
+                  >
+                    <svg
+                      class="explore-btn-send-icon"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M12 19V5m0 0l-7 7m7-7l7 7"
+                      ></path>
+                    </svg>
+                  </button>
+                </div>
+              } @else {
+                <p class="explore-comments-login">Inicia sesión para poder comentar.</p>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- DRAWER DE COMENTARIOS COMPLEMENTARIO -->
+  @if (selectedFileForComments() && activeView() === 'explore') {
+    <div class="explore-drawer-overlay">
+      <div class="explore-drawer">
+        <div class="explore-drawer-header">
+          <div>
+            <h3 class="explore-drawer-title">Comentarios del Apunte</h3>
+            <p class="explore-drawer-subtitle">{{ selectedFileForComments()?.title }}</p>
+          </div>
+          <button (click)="closeComments()" class="explore-drawer-close">
+            <svg
+              class="explore-drawer-close-icon"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+
+        <div class="explore-drawer-body">
+          @for (comment of comments(); track comment._id) {
+            <div class="explore-drawer-comment">
+              <div class="explore-drawer-comment-header">
+                <span class="explore-drawer-comment-author">{{ comment.userFullName }}</span>
+                <span class="explore-drawer-comment-date">{{ formatDate(comment.createdAt) }}</span>
+              </div>
+              <p class="explore-drawer-comment-text">{{ comment.content }}</p>
+
+              @if (canDeleteComment(comment)) {
+                <button (click)="deleteComment(comment._id)" class="explore-drawer-comment-delete">
+                  Borrar
+                </button>
+              }
+            </div>
+          } @empty {
+            <div class="explore-drawer-empty">
+              <p class="explore-drawer-empty-text">Sin comentarios aún</p>
+            </div>
+          }
+        </div>
+
+        <div class="explore-drawer-input">
+          <div class="explore-drawer-form">
+            <textarea
+              #commentBox
+              placeholder="Escribe tu mensaje..."
+              rows="2"
+              class="explore-drawer-field"
+            >
+            </textarea>
+            <button
+              (click)="submitComment(commentBox.value); commentBox.value = ''"
+              class="explore-drawer-send"
+            >
+              <svg
+                class="explore-drawer-send-icon"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 19V5m0 0l-7 7m7-7l7 7"
+                ></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- MODAL FLOTANTE DESLIZANTE PARA SUBIR UN APUNTE -->
+  @if (isUploadModalOpen()) {
+    <div class="explore-upload-overlay">
+      <div class="explore-upload-modal">
+        <div class="explore-upload-header">
+          <div>
+            <h3 class="explore-upload-title">Subir Apunte de Estudio</h3>
+            <p class="explore-upload-desc">
+              Comparte material educativo de manera pública en la plataforma.
+            </p>
+          </div>
+          <button (click)="closeUploadModal()" class="explore-upload-close">
+            <svg
+              class="explore-upload-close-icon"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+
+        <div class="explore-upload-body">
+          <div>
+            <label class="explore-upload-label">Archivo a subir (PDF, Word, ZIP, Imagen)</label>
+            <div
+              (click)="fileInput.click()"
+              (dragover)="$event.preventDefault()"
+              (drop)="onFileDropped($event)"
+              class="explore-upload-dropzone"
+            >
+              <input
+                #fileInput
+                type="file"
+                (change)="onFileSelected($event)"
+                class="explore-upload-hidden-input"
+              />
+
+              <svg
+                class="explore-upload-dropzone-icon"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z"
+                ></path>
+              </svg>
+
+              @if (!selectedFileToUpload()) {
+                <span class="explore-upload-dropzone-text"
+                  >Haz clic para seleccionar o arrastra un archivo aquí</span
+                >
+                <span class="explore-upload-dropzone-hint">Soporta tamaños de hasta 10 MB</span>
+              } @else {
+                <span class="explore-upload-filename">{{ selectedFileToUpload()?.name }}</span>
+                <span class="explore-upload-filesize"
+                  >Peso: {{ formatBytes(selectedFileToUpload()?.size || 0) }}</span
+                >
+              }
+            </div>
+          </div>
+
+          <div>
+            <label class="explore-upload-label">Título del Apunte</label>
+            <input
+              [value]="uploadTitle()"
+              (input)="uploadTitle.set($any($event.target).value)"
+              type="text"
+              placeholder="Ej: Resumen Primer Parcial de Física"
+              class="explore-upload-input"
+            />
+          </div>
+
+          <div>
+            <label class="explore-upload-label">Descripción (Opcional)</label>
+            <textarea
+              [value]="uploadDescription()"
+              (input)="uploadDescription.set($any($event.target).value)"
+              rows="3"
+              placeholder="Detalla qué temas aborda el apunte de estudio..."
+              class="explore-upload-textarea"
+            ></textarea>
+          </div>
+
+          <div>
+            <label class="explore-upload-label">Materia Destino</label>
+            <div class="explore-upload-subject">
+              <span class="explore-upload-subject-dot"></span>
+              {{ getSelectedSubjectName() }}
+            </div>
+          </div>
+
+          <div>
+            <label class="explore-upload-label">Etiquetas / Palabras Clave</label>
+            <input
+              [value]="uploadTags()"
+              (input)="uploadTags.set($any($event.target).value)"
+              type="text"
+              placeholder="Ej: resumen, fisica, cinematica (separadas por comas)"
+              class="explore-upload-input"
+            />
+          </div>
+
+          @if (uploadError()) {
+            <div class="error-message">
+              {{ uploadError() }}
+            </div>
+          }
+          @if (uploadSuccess()) {
+            <div class="success-message">
+              {{ uploadSuccess() }}
+            </div>
+          }
+        </div>
+
+        <div class="explore-upload-footer">
+          <button
+            (click)="closeUploadModal()"
+            [disabled]="isUploading()"
+            class="explore-btn-cancel-upload"
+          >
+            Cancelar
+          </button>
+          <button
+            (click)="submitFileUpload()"
+            [disabled]="isUploading() || !selectedFileToUpload() || !uploadTitle().trim()"
+            class="explore-btn-submit"
+          >
+            @if (isUploading()) {
+              <span class="explore-spinner"></span>
+              Subiendo...
+            } @else {
+              Confirmar Subida
+            }
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- PIE DE PÁGINA -->
+  <footer class="explore-footer">
+    <p>
+      © 2026 UPC-Share. Repositorio institucional colaborativo para la Universidad Provincial de
+      Córdoba.
+    </p>
+  </footer>
+</div>
+
+<!-- Mobile Menu Overlay -->
+@if (menuOpen()) {
+  <div class="explore-mobile-overlay">
+    <div class="explore-mobile-menu">
+      <!-- Close button -->
+      <div class="explore-mobile-close">
+        <button
+          (click)="menuOpen.set(false)"
+          class="explore-mobile-close-btn"
+          aria-label="Cerrar menú"
+        >
+          <svg
+            class="explore-mobile-close-icon"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Nav links -->
+      <nav class="explore-mobile-nav">
+        <a routerLink="/about" (click)="menuOpen.set(false)" class="explore-mobile-link">
+          <svg
+            class="explore-mobile-link-icon"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z"
+            ></path>
+          </svg>
+          Nosotros
+        </a>
+        <a routerLink="/services" (click)="menuOpen.set(false)" class="explore-mobile-link">
+          <svg
+            class="explore-mobile-link-icon"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75"
+            ></path>
+          </svg>
+          Servicios
+        </a>
+        <a routerLink="/gallery" (click)="menuOpen.set(false)" class="explore-mobile-link">
+          <svg
+            class="explore-mobile-link-icon"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z"
+            ></path>
+          </svg>
+          Galería
+        </a>
+        <a routerLink="/blog" (click)="menuOpen.set(false)" class="explore-mobile-link">
+          <svg
+            class="explore-mobile-link-icon"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z"
+            ></path>
+          </svg>
+          Blog
+        </a>
+        <a routerLink="/contact" (click)="menuOpen.set(false)" class="explore-mobile-link">
+          <svg
+            class="explore-mobile-link-icon"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
+            ></path>
+          </svg>
+          Contacto
+        </a>
+      </nav>
+
+      <!-- Auth in mobile menu -->
+      <div class="explore-mobile-auth">
+        @if (authService.isAuthenticated()) {
+          <div class="explore-mobile-user">
+            <span class="explore-mobile-user-name">
+              <span class="explore-mobile-dot"></span>
+              {{ authService.currentUser()?.fullName }}
+            </span>
+            <button
+              (click)="authService.logout(); menuOpen.set(false)"
+              class="explore-mobile-logout"
+            >
+              Cerrar Sesión
+            </button>
+          </div>
+        } @else {
+          <div class="explore-mobile-auth-btns">
+            <a routerLink="/auth/login" (click)="menuOpen.set(false)" class="explore-mobile-login">
+              <svg
+                class="explore-mobile-login-icon"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9"
+                ></path>
+              </svg>
+              Iniciar Sesión
+            </a>
+            <a
+              routerLink="/auth/register"
+              (click)="menuOpen.set(false)"
+              class="explore-mobile-register"
+            >
+              Crear Cuenta
+            </a>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+}
