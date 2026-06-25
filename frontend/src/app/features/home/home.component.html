@@ -1,0 +1,204 @@
+<div class="home-container">
+
+  <!-- HEADER -->
+  <header class="home-header">
+    <div class="home-header-inner">
+      <a routerLink="/" class="home-logo">
+        UPC<span class="home-logo-accent">-Share</span>
+      </a>
+      <nav class="home-nav">
+        <a routerLink="/explore"  class="home-nav-link">Repositorio</a>
+        <a routerLink="/about"    class="home-nav-link">Nosotros</a>
+        <a routerLink="/services" class="home-nav-link">Servicios</a>
+        <a routerLink="/gallery"  class="home-nav-link">Galería</a>
+        <a routerLink="/blog"     class="home-nav-link">Blog</a>
+        <a routerLink="/contact"  class="home-nav-link">Contacto</a>
+      </nav>
+      <div class="home-header-cta">
+        <a routerLink="/auth/login"    class="home-btn-ghost">Ingresar</a>
+        <a routerLink="/auth/register" class="home-btn-primary">Registrarse</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="home-hero">
+
+    <div class="home-hero-left">
+      <span class="home-hero-badge">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5z"/>
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/>
+        </svg>
+        Universidad Provincial de Córdoba
+      </span>
+
+      <h1 class="home-hero-title">
+        El repositorio colaborativo<br>
+        de la <span class="home-accent-text">UPC</span>
+      </h1>
+
+      <p class="home-hero-desc">
+        Accedé a apuntes, parciales y guías de estudio compartidos por la comunidad estudiantil.
+        Organizados por carrera y materia, disponibles para todos, de forma gratuita.
+      </p>
+
+      <div class="home-hero-actions">
+        <a routerLink="/explore" class="home-btn-primary home-btn-lg">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 15.803 7.5 7.5 0 0016.803 15.803z"/>
+          </svg>
+          Explorar apuntes
+        </a>
+        <a routerLink="/auth/register" class="home-btn-outline home-btn-lg">
+          Crear cuenta gratis
+        </a>
+      </div>
+
+      <div class="home-stats">
+        @for (stat of stats; track stat.label) {
+          <div class="home-stat">
+            <span class="home-stat-value">{{ stat.value }}</span>
+            <span class="home-stat-label">{{ stat.label }}</span>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="home-hero-right">
+      <div class="home-mockup">
+        <div class="home-mockup-header">
+          <span class="home-dot home-dot-red"></span>
+          <span class="home-dot home-dot-yellow"></span>
+          <span class="home-dot home-dot-green"></span>
+          <span class="home-mockup-title">Repositorio UPC-Share</span>
+        </div>
+        <div class="home-mockup-body">
+          <div class="home-mockup-career home-mockup-career--active">
+            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5z"/>
+            </svg>
+            Ingeniería en Sistemas
+          </div>
+          <div class="home-mockup-career">
+            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5z"/>
+            </svg>
+            Contador Público
+          </div>
+          <div class="home-mockup-career">
+            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5z"/>
+            </svg>
+            Administración
+          </div>
+          <div class="home-mockup-divider"></div>
+          <div class="home-mockup-file">
+            <span class="home-mockup-tag">PDF</span>
+            <span class="home-mockup-filename">Resumen Álgebra — 1er Parcial</span>
+            <span class="home-mockup-likes">♥ 42</span>
+          </div>
+          <div class="home-mockup-file">
+            <span class="home-mockup-tag">DOCX</span>
+            <span class="home-mockup-filename">Guía de Análisis Matemático</span>
+            <span class="home-mockup-likes">♥ 31</span>
+          </div>
+          <div class="home-mockup-file">
+            <span class="home-mockup-tag">PDF</span>
+            <span class="home-mockup-filename">Parcial resuelto — Física I</span>
+            <span class="home-mockup-likes">♥ 28</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- CARACTERÍSTICAS -->
+  <section class="home-features">
+    <div class="home-section-inner">
+      <div class="home-section-header">
+        <span class="home-section-tag">¿Qué podés hacer?</span>
+        <h2 class="home-section-title">
+          Todo lo que necesitás para <span class="home-accent-text">estudiar mejor</span>
+        </h2>
+        <p class="home-section-subtitle">
+          Una plataforma pensada por estudiantes, para estudiantes. Simple, rápida y siempre disponible.
+        </p>
+      </div>
+      <div class="home-features-grid">
+        @for (feature of features; track feature.title; let i = $index) {
+          <div class="home-feature-card"
+               (mouseenter)="activeFeature.set(i)"
+               (mouseleave)="activeFeature.set(null)"
+               [class.home-feature-card--active]="activeFeature() === i">
+            <div class="home-feature-icon-wrap">
+              @if (feature.icon === 'book') {
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                </svg>
+              }
+              @if (feature.icon === 'upload') {
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z"/>
+                </svg>
+              }
+              @if (feature.icon === 'message') {
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                </svg>
+              }
+              @if (feature.icon === 'heart') {
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                </svg>
+              }
+            </div>
+            <h3 class="home-feature-title">{{ feature.title }}</h3>
+            <p class="home-feature-text">{{ feature.description }}</p>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="home-cta">
+    <div class="home-cta-box">
+      <span class="home-section-tag">Comunidad abierta</span>
+      <h2 class="home-cta-title">
+        Empezá a <span class="home-accent-text">compartir</span> hoy
+      </h2>
+      <p class="home-cta-desc">
+        Unite a cientos de estudiantes de la UPC que ya colaboran subiendo y descargando
+        material de estudio. Es gratis, es simple, y ayuda a toda la comunidad.
+      </p>
+      <div class="home-cta-actions">
+        <a routerLink="/auth/register" class="home-btn-primary home-btn-lg">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/>
+          </svg>
+          Crear mi cuenta
+        </a>
+        <a routerLink="/explore" class="home-btn-ghost home-btn-lg">
+          Ver el repositorio →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="home-footer">
+    <p>© 2026 UPC-Share. Repositorio institucional colaborativo para la Universidad Provincial de Córdoba.</p>
+    <div class="home-footer-links">
+      <a routerLink="/explore" class="home-footer-link">Repositorio</a>
+      <span class="home-footer-sep">·</span>
+      <a routerLink="/about"   class="home-footer-link">Nosotros</a>
+      <span class="home-footer-sep">·</span>
+      <a routerLink="/contact" class="home-footer-link">Contacto</a>
+      <span class="home-footer-sep">·</span>
+      <a routerLink="/auth/login" class="home-footer-link">Ingresar</a>
+    </div>
+  </footer>
+
+</div>
