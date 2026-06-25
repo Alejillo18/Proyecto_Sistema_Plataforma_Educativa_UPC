@@ -206,7 +206,28 @@
   overflow: hidden;
 }
 
+<<<<<<< Updated upstream
 .gallery-card-icon svg {
+=======
+.glow-effect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.1;
+  background: radial-gradient(circle at 50% 50%, rgba(215, 134, 29, 0.3), transparent 70%);
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.visual-icon {
+>>>>>>> Stashed changes
   width: 4rem;
   height: 4rem;
 }

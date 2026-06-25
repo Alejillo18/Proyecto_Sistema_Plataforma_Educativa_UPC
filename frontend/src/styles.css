@@ -57,11 +57,35 @@
   --success-text: #86efac;
   --success-bg: #0f1a14;
   --success-border: #1a2e22;
+<<<<<<< Updated upstream
   --glow: rgba(59, 130, 246, 0.15);
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
   --shadow-md: 0 1px 3px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3);
   --shadow-lg: 0 4px 6px rgba(0, 0, 0, 0.4);
   --header-gradient: linear-gradient(to right, #000814, #071028, #000814);
+=======
+  --glow: rgba(215, 134, 29, 0.15);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
+  --shadow-md: 0 1px 3px rgba(0,0,0,0.4), 0 1px 2px rgba(0,0,0,0.3);
+  --shadow-lg: 0 4px 6px rgba(0,0,0,0.4);
+  --header-gradient: linear-gradient(to right, #121212, #0a0a0a, #121212);
+}
+
+[data-theme="dark"],
+[data-theme="dark"] body,
+[data-theme="dark"] p,
+[data-theme="dark"] h1, [data-theme="dark"] h2, [data-theme="dark"] h3, [data-theme="dark"] h4, [data-theme="dark"] h5, [data-theme="dark"] h6,
+[data-theme="dark"] span, [data-theme="dark"] div, [data-theme="dark"] li, [data-theme="dark"] a,
+[data-theme="dark"] label, [data-theme="dark"] small, [data-theme="dark"] strong, [data-theme="dark"] b,
+[data-theme="dark"] em, [data-theme="dark"] i, [data-theme="dark"] u, [data-theme="dark"] blockquote,
+[data-theme="dark"] figcaption, [data-theme="dark"] cite, [data-theme="dark"] td, [data-theme="dark"] th,
+[data-theme="dark"] button:not([class*="text-"]),
+[data-theme="dark"] input, [data-theme="dark"] textarea, [data-theme="dark"] select,
+[data-theme="dark"] article, [data-theme="dark"] section, [data-theme="dark"] aside,
+[data-theme="dark"] nav, [data-theme="dark"] header, [data-theme="dark"] footer,
+[data-theme="dark"] summary, [data-theme="dark"] details, [data-theme="dark"] time {
+  color: #ffffff !important;
+>>>>>>> Stashed changes
 }
 
 html {
@@ -125,11 +149,13 @@ object {
   max-width: 100%;
   height: auto;
 }
+
 table {
   overflow-x: auto;
   display: block;
   max-width: 100%;
 }
+<<<<<<< Updated upstream
 pre,
 code {
   white-space: pre-wrap;
@@ -139,8 +165,18 @@ input,
 textarea,
 select,
 button {
+=======
+
+pre, code {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+input, textarea, select, button {
+>>>>>>> Stashed changes
   font-size: max(16px, 1rem);
 }
+
 * {
   box-sizing: border-box;
 }

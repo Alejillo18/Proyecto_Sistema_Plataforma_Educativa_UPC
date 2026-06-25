@@ -9,6 +9,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+<<<<<<< Updated upstream
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(24px);
   border-width: 1px;
@@ -23,10 +24,37 @@
 
 .theme-toggle.theme-dark {
   background: rgba(255, 255, 255, 0.1);
+=======
+  box-shadow: var(--shadow-lg);
+  backdrop-filter: blur(24px);
+  border: 1px solid;
+  transition: all 0.5s ease;
+  cursor: pointer;
+}
+
+.theme-toggle:hover {
+  scale: 1.1;
+}
+
+.theme-toggle-light {
+  background-color: rgba(15, 23, 42, 0.8);
+  border-color: rgba(51, 65, 85, 0.5);
+  color: var(--accent-text);
+}
+
+.theme-toggle-light:hover {
+  background-color: rgb(30, 41, 59);
+  box-shadow: 0 0 25px rgba(59, 130, 246, 0.2);
+}
+
+.theme-toggle-dark {
+  background-color: rgba(255, 255, 255, 0.1);
+>>>>>>> Stashed changes
   border-color: rgba(255, 255, 255, 0.2);
   color: #fde047;
 }
 
+<<<<<<< Updated upstream
 .theme-toggle.theme-dark:hover {
   background: rgba(255, 255, 255, 0.2);
   box-shadow: 0 0 25px rgba(59, 130, 246, 0.3);
@@ -55,4 +83,23 @@
 
 .theme-toggle.theme-light:hover .theme-icon {
   transform: rotate(-45deg);
+=======
+.theme-toggle-dark:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 25px rgba(59, 130, 246, 0.3);
+}
+
+.theme-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  transition: transform 0.5s ease;
+}
+
+.theme-toggle-light:hover .theme-icon {
+  rotate: 45deg;
+}
+
+.theme-toggle-dark:hover .theme-icon {
+  rotate: -45deg;
+>>>>>>> Stashed changes
 }
