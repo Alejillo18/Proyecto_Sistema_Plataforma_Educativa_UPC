@@ -5,12 +5,19 @@
       
       <div class="header-top">
         <span class="badge-tag">Blog</span>
-        <a routerLink="/" class="back-link">
-          <svg class="icon-back" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"></path>
-          </svg>
-          Volver al Repositorio
-        </a>
+        <nav style="display:flex;align-items:center;gap:0.375rem;flex-wrap:wrap;">
+          <a routerLink="/" class="back-link">
+            <svg class="icon-back" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"></path>
+            </svg>
+            Inicio
+          </a>
+          <a routerLink="/explore" class="nav-link">Repositorio</a>
+          <a routerLink="/about" class="nav-link">Nosotros</a>
+          <a routerLink="/services" class="nav-link">Servicios</a>
+          <a routerLink="/gallery" class="nav-link">Galería</a>
+          <a routerLink="/contact" class="nav-link">Contacto</a>
+        </nav>
       </div>
       
       <div class="header-content">
